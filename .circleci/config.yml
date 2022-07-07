@@ -36,8 +36,9 @@ jobs:
       - run: echo "text to Output" > output.txt
 
       - persist_to_workspace:
-        root: .
+        root: ~/
         paths:
+          - output.txt
 
   print_output_file:
     docker:
@@ -45,9 +46,9 @@ jobs:
 
     steps:
       - attach_workspace:
-        at: .
+        at: ~/
 
-      - run: cat output.txt
+      - run: cat ~/output.txt
 
     
 
@@ -59,5 +60,7 @@ workflows:
     jobs:
       - save_hello_world_output
       - print_output_file
+        requires:
+          - save_hello_world_output
         
 
