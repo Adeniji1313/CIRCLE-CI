@@ -36,7 +36,7 @@ jobs:
       - run: echo "text to Output" > output.txt
 
       - persist_to_workspace:
-          root: ~/
+          root: .
           paths:
             - output.txt
 
@@ -46,9 +46,9 @@ jobs:
 
     steps:
       - attach_workspace: 
-          at: ~/
+          at: .
 
-      - run: cat ~/output.txt
+      - run: cat ./output.txt
 
     
 
