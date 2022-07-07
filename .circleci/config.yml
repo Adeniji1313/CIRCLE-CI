@@ -60,7 +60,7 @@ jobs:
       - run: exit 1
       - run:
           name: on error
-          command: echo WAHALA WA OO
+          command: echo "WAHALA WA OO"
           when: on_fail
 
 
