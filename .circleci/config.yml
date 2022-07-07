@@ -9,7 +9,7 @@ commands:
     description: This will print the CircleCI workflow ID
     parameters:
       to:
-        type: string
+        type: strin
   
     steps:
       - run: echo << parameters.to >>
@@ -68,6 +68,11 @@ jobs:
     steps:
       - print_pipeline_id:
           to: Abbas
+
+      - run:
+          name: on error
+          command: echo WAHALA WA OO
+          when: on_fail
 
 
     
