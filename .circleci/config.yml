@@ -57,7 +57,7 @@ jobs:
 
   smoke_test:
     docker:
-      - ImageId: alpine:latest
+      - image: alpine:latest
 
     steps:
         - run: apk add --update curl
