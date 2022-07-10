@@ -21,56 +21,26 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
 
-  print-hello:
+  create_infra:
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
 
     steps:
       - checkout
       - run:
-          name: "print-hello"
-          command:  "echo Hello"
-
-  save_hello_world_output:
-    docker:
-      - image: circleci/node:13.8.0
-
-    steps:
-      - run: echo "text to Output" > output.txt
-
-      - persist_to_workspace:
-          root: .
-          paths:
-            - output.txt
-
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-
-    steps:
-      - attach_workspace: 
-          at: .
-
-      - run: cat ./output.txt
-
-  my_job:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: exit 1
-      - run:
-          name: on error
-          command: echo "WAHALA WA OO"
-          when: "on_fail"
-
-
+        name: Create Cloudformation Stack
+        command: |
+          aws cloudformation deploy \
+          --template-file template.yml
+          --stack-name  cicdStack-${CIRCLE_WORKFLOW_ID:0:5}\
+          --region us-east-1
     
 
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  my-workflow:
     jobs:
-      - my_job
+      - create_infra
 
