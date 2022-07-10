@@ -48,7 +48,7 @@ jobs:
           name: Install Ansible
           command: |
             apk add --update ansible
-            sudo apt install ansible
+      
 
       - run:
           name: Run Playbook and Configure Server
