@@ -16,7 +16,7 @@ Resources:
     Properties:
       SecurityGroups:
         - !Ref  InstanceSecurityGroup
-      KeyName: Abbas3.pem
+      KeyName: Abbas3
       ImageId: ami-052efd3df9dad4825
       InstanceType: t2.micro
 

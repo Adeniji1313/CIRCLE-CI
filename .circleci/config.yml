@@ -27,8 +27,6 @@ jobs:
 
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints: ["8a:7d:67:72:7f:71:35:89:65:bc:eb:cc:83:5d:1b:48"]
       - run:
           name: Create Cloudformation Stack
           command: |
