@@ -93,7 +93,6 @@ jobs:
             --parameter-overrides MyBucketName="abbas-front-${CIRCLE_WORKFLOW_ID:0:7}"
 
       - run: aws s3 cp ./index.html s3://abbas-front-${CIRCLE_WORKFLOW_ID:0:7}
-      - run: whereis index.html
 
 
 # Invoke jobs via workflows
