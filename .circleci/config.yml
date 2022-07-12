@@ -77,6 +77,21 @@ jobs:
 
         - destroy_env
     
+  deploy_front_end:
+    docker:
+      - image: amazon/aws-cli
+
+    steps:
+      - checkout
+      - run:
+          name: Execute bucket.yml - Create Cloud formation stack
+          command: |
+            aws cloudformation deploy \
+            --template-file bucket.yml \
+            --stack-name abbas-front-end-${CIRCLE_WORKFLOW_ID} \
+            --parameter-overides MyBucketName="abbas-front-${CIRCLE_WORKFLOW_ID}"
+
+      - run: aws s3 sync index.html s3://abbas-front-${CIRCLE_WORKFLOW_ID} --delete
 
 
 # Invoke jobs via workflows
@@ -84,10 +99,7 @@ jobs:
 workflows:
   my-workflow:
     jobs:
-      - create_infra
-      - smoke_test:
-          requires:
-             - create_infra 
+      - deploy_front_end
       # - create_infra
       # - configure_infra:
       #    requires:
