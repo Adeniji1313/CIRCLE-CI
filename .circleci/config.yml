@@ -91,13 +91,13 @@ jobs:
             --stack-name abbas-front-end-${CIRCLE_WORKFLOW_ID} \
             --parameter-overrides MyBucketName="abbas-front-${CIRCLE_WORKFLOW_ID}"
 
-      - run: aws s3 sync index.html s3://abbas-front-${CIRCLE_WORKFLOW_ID:0:7} --delete
+      - run: aws s3 sync . s3://abbas-front-${CIRCLE_WORKFLOW_ID:0:7} --delete
 
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  my-workflow:
+  deployment:
     jobs:
       - deploy_front_end
       # - create_infra
